@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux'; //для подключения к глобальному store.js
 
 // Data
-import actions from '../../redux/phonebook-actions';
+import contactsOperations from '../../redux/phonebook-operations';
 
 import s from './ContactList.module.css';
 
@@ -60,7 +60,7 @@ const mapStateToProps = ({ contacts: { items, filter } }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onDeleteContact: id => dispatch(actions.deleteContact(id)),
+  onDeleteContact: id => dispatch(contactsOperations.deleteContact(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

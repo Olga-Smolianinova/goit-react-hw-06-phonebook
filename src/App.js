@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
+// Data
+import contactsOperations from './redux/phonebook-operations';
 // Components
 import ContactsForm from './components/ContactsForm';
 
@@ -8,6 +12,12 @@ import Filter from './components/Filter';
 import ContactList from './components/ContactList';
 
 class App extends Component {
+  //  ЖИЗНЕННЫЕ ЦИКЛЫ
+  componentDidMount() {
+    // // при Mount страницы, чтобы из локального бекенда db.json - отрисовывались данные (contacts)
+    this.props.fetchContacts();
+  }
+
   render() {
     return (
       <div className="App">
@@ -19,10 +29,21 @@ class App extends Component {
 
         <Filter />
 
+        {/* добавляем отображение Loading при открытии страницы при загрузке данных*/}
+        {this.props.isLoadingContacts && <h2>Loading...</h2>}
+
         <ContactList />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isLoadingContacts: state.contacts.loading,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchContacts: () => dispatch(contactsOperations.fetchContacts()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

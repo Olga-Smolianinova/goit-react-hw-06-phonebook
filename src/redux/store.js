@@ -3,8 +3,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'; //// co
 import logger from 'redux-logger'; // прослойка (middleware) при console.log() отображает action (до и после)
 
 import {
-  persistStore,
-  persistReducer,
+  // persistStore,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -12,8 +11,6 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist'; //позволяет записывать какие-либо данные куда-либо, например в local storage. persistStore - для всего store; persistReducer - для одного редьюсера. Все остальное - для проработки ошибок в консоли
-
-import storage from 'redux-persist/lib/storage'; // Это ссылка на local storage для браузера
 
 // Reducers
 import phonebookReducer from './phonebook-reducer';
@@ -29,15 +26,8 @@ const middleware = [
     },
   }),
   //logger - прослойка (middleware) при console.log() отображает action (до и после). Чтобы ее добавить - устанавливаем и import logger из redux-logger
-  logger,
+  logger, //прослойка (middleware) при console.log() отображает action (до и после) и добавляем его в reducer
 ];
-
-// Создаем конфигурацию persist
-const phonebookPersistConfig = {
-  key: 'contacts', // key - ключ, как будет записано в local storage
-  storage, ////ссылкa на local storage, которая заимпортирована вверху из библиотеки
-  blacklist: ['filter'], // можно добавлять blacklist||whitelist, в которых указывать, что исключить||что включить в local storage
-};
 
 // Для каждого объекта в глобальном state свой отдельный Reducer. И внизу этого файла есть корневой редьюсер (rootReducer), где ключ - это название компонента со state для него, а значение - редьюсер, который отвечает за него.
 
@@ -48,7 +38,7 @@ const store = configureStore({
   // reducer: {}, под капотом уже использует combineReducers  from 'redux' для композиции редьюсеров, то есть совмещать много в один.
   reducer: {
     // тот reducer, который нужен для persist сперва оборачиваем в persistReducer.
-    contacts: persistReducer(phonebookPersistConfig, phonebookReducer), //Значение - вызов rootReducer c  persistedReducer, для того чтобы записывать какие-либо данные куда-либо, например в local storage
+    contacts: phonebookReducer,
   },
   middleware, //возвращает список default Middlewares (прослоек), к которому добавляем еще logger =  прослойка (middleware) при console.log() отображает action (до и после)
 
@@ -56,8 +46,11 @@ const store = configureStore({
 });
 
 //Создаем  persistor - обертка над store, которая при изменении store будет записывать в local storage и обновлять его.
-const persistor = persistStore(store);
+// const persistor = persistStore(store);
 
 // И export persistor  и store
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { persistor, store };
+// export default { persistor, store };
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default store;

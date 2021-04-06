@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux'; //для подключения к глобальному store.js
 
 // Data
-import actions from '../../redux/phonebook-actions';
+import contactsOperations from '../../redux/phonebook-operations';
 
 // Styles
 import s from './ContactsForm.module.css';
@@ -104,7 +104,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: (name, number) => dispatch(actions.addContact(name, number)),
+  onSubmit: (name, number) =>
+    dispatch(contactsOperations.addContact(name, number)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactsForm);
