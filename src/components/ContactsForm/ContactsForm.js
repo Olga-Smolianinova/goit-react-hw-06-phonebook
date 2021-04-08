@@ -7,6 +7,8 @@ import { connect } from 'react-redux'; //для подключения к гло
 // Data
 import contactsOperations from '../../redux/phonebook-operations';
 
+import contactsSelectors from '../../redux/phonebook-selectors';
+
 // Styles
 import s from './ContactsForm.module.css';
 
@@ -100,7 +102,7 @@ ContactsForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  contacts: state.contacts.items,
+  contacts: contactsSelectors.getAllContacts(state),
 });
 
 const mapDispatchToProps = dispatch => ({

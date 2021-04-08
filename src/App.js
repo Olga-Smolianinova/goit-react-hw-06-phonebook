@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 
 // Data
 import contactsOperations from './redux/phonebook-operations';
+
+import contactsSelectors from './redux/phonebook-selectors';
+
 // Components
 import ContactsForm from './components/ContactsForm';
 
@@ -39,7 +42,9 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  isLoadingContacts: state.contacts.loading,
+  // isLoadingContacts: state.contacts.loading, //без использования selectors
+
+  isLoadingContacts: contactsSelectors.getLoading(state), //с использованием selectors
 });
 
 const mapDispatchToProps = dispatch => ({

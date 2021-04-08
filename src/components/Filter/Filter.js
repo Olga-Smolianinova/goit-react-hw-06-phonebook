@@ -7,6 +7,8 @@ import { connect } from 'react-redux'; //для подключения к гло
 // Data
 import actions from '../../redux/phonebook-actions';
 
+import contactsSelectors from '../../redux/phonebook-selectors';
+
 const Filter = ({ value, onChange }) => (
   <label>
     Find contacts by name
@@ -21,7 +23,7 @@ Filter.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  value: state.contacts.filter,
+  value: contactsSelectors.getFilter(state),
 });
 
 const mapDispatchToProps = dispatch => ({
