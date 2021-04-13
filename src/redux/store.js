@@ -13,7 +13,7 @@ import {
 } from 'redux-persist'; //позволяет записывать какие-либо данные куда-либо, например в local storage. persistStore - для всего store; persistReducer - для одного редьюсера. Все остальное - для проработки ошибок в консоли
 
 // Reducers
-import phonebookReducer from './phonebook-reducer';
+import phonebookReducer from './phonebook/phonebook-reducer';
 
 // создаем новый стек прослоек, который вернет список default Middlewares (прослоек), к которому добавляем еще logger =  прослойка (middleware) при console.log() отображает action (до и после) и добавляем его в reducer
 

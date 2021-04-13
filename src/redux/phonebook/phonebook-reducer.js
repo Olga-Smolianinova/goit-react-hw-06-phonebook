@@ -5,6 +5,8 @@ import { combineReducers } from 'redux'; //для композиции редь�
 //Data
 import actions from './phonebook-actions'; //actions
 
+// import {contactsActions} from './phonebook-actions'
+
 //1- редьюсер для contacts with Toolkit. В createReducer() - 1 параметр - это начальное значение state; 2 - это объект кейсов, где каждый ключ это тип действия, а значение - это редюсер для этого типа
 const items = createReducer([], {
   [actions.fetchContactsSuccess]: (_, { payload }) => payload, //чтобы при первой загрузке страницы отрисовывались все contacts из локального бекенда (db.json)

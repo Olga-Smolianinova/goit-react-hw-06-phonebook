@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // Data
-import contactsOperations from './redux/phonebook-operations';
-
-import contactsSelectors from './redux/phonebook-selectors';
+import { contactsOperations, contactsSelectors } from './redux/phonebook';
 
 // Components
 import ContactsForm from './components/ContactsForm';

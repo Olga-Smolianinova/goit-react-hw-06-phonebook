@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux'; //для подключения к глобальному store.js
 
 // Data
-import actions from '../../redux/phonebook-actions';
-
-import contactsSelectors from '../../redux/phonebook-selectors';
+import { contactsActions, contactsSelectors } from '../../redux/phonebook';
 
 const Filter = ({ value, onChange }) => (
   <label>
@@ -27,7 +25,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onChange: event => dispatch(actions.changeFilter(event.target.value)),
+  onChange: event => dispatch(contactsActions.changeFilter(event.target.value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

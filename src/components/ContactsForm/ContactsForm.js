@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux'; //для подключения к глобальному store.js
 
 // Data
-import contactsOperations from '../../redux/phonebook-operations';
-
-import contactsSelectors from '../../redux/phonebook-selectors';
+import { contactsOperations, contactsSelectors } from '../../redux/phonebook';
 
 // Styles
 import s from './ContactsForm.module.css';
